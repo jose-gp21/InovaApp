@@ -5,8 +5,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-
-
 import AudienceNavigation from './StackNavigator/LiveAudienceStackNavigator';
 import HostNavigation from './StackNavigator/LiveHostStackNavigator';
 import Cart from '../pages/botttomTabPages/Cart';

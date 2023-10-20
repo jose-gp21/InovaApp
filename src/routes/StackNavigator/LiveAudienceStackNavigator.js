@@ -1,8 +1,6 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-
 import HomeAudiencePage from "../../live/HomeAudiencePage";
 import AudiencePage from "../../live/AudiencePage";
 import Feed from "../../pages/botttomTabPages/Feed";
