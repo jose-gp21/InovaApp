@@ -8,8 +8,8 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import AudienceNavigation from './StackNavigator/LiveAudienceStackNavigator';
 import HostNavigation from './StackNavigator/LiveHostStackNavigator';
 import Cart from '../pages/botttomTabPages/Cart';
-import Profile from '../pages/botttomTabPages/Profile';
-import Search from '../pages/botttomTabPages/Search';
+import Profile from '../pages/ProfilePages/Profile';
+import Search from '../pages/SearchPages/Search';
 import ButtonCreateFocused from '../components/ButtonBottomTab/ButtonCreateFocused';
 import ButtonCreateNotFocused from '../components/ButtonBottomTab/ButtonCreateNotFocused';
 

@@ -11,12 +11,15 @@ import Signin from "./pages/Auth/screens/Signin";
 import Signup from "./pages/Auth/screens/Signup";
 import { colors } from "./pages/Auth/utils/colors";
 import { GoogleSignin} from '@react-native-google-signin/google-signin';
+import SignUpModal from "./pages/Auth/AuthComponents/LoginModal/LoginModal";
+import Login from "./pages/Auth/Login&Register/Login";
+import Register from "./pages/Auth/Login&Register/Register";
 
 const Stack = createNativeStackNavigator();
 
 const WEB_CLIENT_ID = '125777671641-8lqmlqj2d2aj96o580fvu5eto88t3nqf.apps.googleusercontent.com'
 export default function AppNavigation() {
-    const isSignedIn = false;
+    const isSignedIn = true;
     useEffect(() => {
         GoogleSignin.configure({
           scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -60,6 +63,24 @@ export default function AppNavigation() {
                                 headerMode="none"
                                 name="ProdutosNovos"
                                 component={ProdutosNovos}
+                            />
+                            <Stack.Screen
+                                options={{ headerShown: false }}
+                                headerMode="none"
+                                name="LoginModal"
+                                component={SignUpModal}
+                            />
+                            <Stack.Screen
+                                options={{ headerShown: false }}
+                                headerMode="none"
+                                name="Login"
+                                component={Login}
+                            />
+                            <Stack.Screen
+                                options={{ headerShown: false }}
+                                headerMode="none"
+                                name="Register"
+                                component={Register}
                             />
                         </>
                     ) : (

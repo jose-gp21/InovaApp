@@ -10,13 +10,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "@invertase/react-native-apple-authentication": "^2.3.0",
     "@react-native-google-signin/google-signin": "^10.0.1",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "@zegocloud/zego-uikit-prebuilt-live-streaming-rn": "^2.1.0",
     "@zegocloud/zego-uikit-rn": "^2.2.6",
-    "axios": "^1.5.1",
+    "axios": "^1.6.2",
     "react": "18.2.0",
     "react-delegate-component": "^1.0.0",
     "react-native": "0.72.4",
