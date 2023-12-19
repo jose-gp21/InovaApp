@@ -4,11 +4,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { COLORS, SIZES } from '../../../assets/constants/index';
+import SignUpModal from '../Auth/AuthComponents/LoginModal/LoginModal';
 
 const Perfil = ({ navigation }) => {
 
   const [userData, setUserData] = useState(null);
   const [userLogin, setUserLogin] = useState(false);
+
+  const [isSignUpModalVisible, setSignUpModalVisible] = useState(false);
+  const openSignUpModal = () => setSignUpModalVisible(true);
+  const closeSignUpModal = () => setSignUpModalVisible(false);
 
 
   const logout = ()  => {
@@ -78,7 +83,7 @@ const Perfil = ({ navigation }) => {
             {userLogin === true ? userData?.name : "Faça Login por favor"}
           </Text>
           {userLogin === false ? (
-            <TouchableOpacity onPress={() => navigation.navigate('LoginModal')}>
+            <TouchableOpacity onPress={openSignUpModal}>
               <View style={styles.loginBtn}>
                 <Text style={styles.menuText}>LOGIN</Text>
               </View>
@@ -143,6 +148,11 @@ const Perfil = ({ navigation }) => {
           </View>
         )}
         </View>
+
+        <SignUpModal
+        isVisible={isSignUpModalVisible}
+        onClose={closeSignUpModal}
+      />
       </SafeAreaView>
     </ScrollView>
   )
