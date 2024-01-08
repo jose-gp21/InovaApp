@@ -97,14 +97,25 @@ const Perfil = ({ navigation }) => {
           {userLogin ? (
           <View style={styles.menuWrapper}>
 
-            <TouchableOpacity onPress={clearCache}>
+            <TouchableOpacity onPress={() => navigation.navigate('Favoritos')}>
               <View style={styles.menuItem}>
                 <MaterialCommunityIcons
-                  name="cached"
+                  name="heart-outline"
                   color={COLORS.primary}
                   size={24}
                 />
-                <Text style={styles.menuText}>Limpar Cache</Text>
+                <Text style={styles.menuText}>Favoritos</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={()=>navigation.navigate('Order')}>
+              <View style={styles.menuItem}>
+                <MaterialCommunityIcons
+                  name="truck-delivery-outline"
+                  color={COLORS.primary}
+                  size={24}
+                />
+                <Text style={styles.menuText}>Pedidos</Text>
               </View>
             </TouchableOpacity>
 
@@ -130,21 +141,14 @@ const Perfil = ({ navigation }) => {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Configurações')}>
-              <View style={styles.menuItem}>
-                <MaterialCommunityIcons
-                  name="cog-outline"
-                  color={COLORS.primary}
-                  size={24}
-                />
-                <Text style={styles.menuText}>Configurações</Text>
-              </View>
-            </TouchableOpacity>
+
 
           </View>
         ) : (
           <View style={styles.menuWrapper}>
-            
+            <TouchableOpacity>
+              <View style={styles.menuItem}></View>
+            </TouchableOpacity>
           </View>
         )}
         </View>

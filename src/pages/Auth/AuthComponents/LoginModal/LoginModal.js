@@ -1,12 +1,26 @@
-import React from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import React, { useEffect } from 'react';
+import { Modal, View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import GoogleSignInButton from './GoogleButton';
 import AppleSignInButton from './AppleButton';
 import OrSeparator from './OuSeparador';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { SIZES } from '../../../../../assets/constants';
+import { useNavigation } from '@react-navigation/native';
 
 const SignUpModal = ({ isVisible, onClose }) => {
+
+  const [localVisible, setLocalVisible] = React.useState(isVisible);
+
+  React.useEffect(() => {
+    setLocalVisible(isVisible);
+  }, [isVisible]);
+
+  const handleClose = () => {
+    setLocalVisible(false);
+    onClose(); // Chama a função onClose passada pelo componente pai
+  };
+
+  const navigation = useNavigation();
   return (
     <Modal
       animationType="fade"
@@ -28,12 +42,12 @@ const SignUpModal = ({ isVisible, onClose }) => {
 
           <OrSeparator/>
 
-          <TouchableOpacity style={styles.createAccountButton}>
+          <TouchableOpacity style={styles.createAccountButton} onPress={()=>navigation.navigate("Register")}>
             <Text style={styles.textButtonCreate}>Criar Conta</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity style={styles.loginWrapper} onPress={onClose}>
-            <Text style={styles.loginText}>Já possui uma conta? </Text>
+          <TouchableOpacity style={styles.loginWrapper} onPress={()=>navigation.navigate("Login")}>
+            <Text style={styles.loginText} >Já possui uma conta? </Text>
             <Text style={styles.loginText2}>Faça login</Text>
           </TouchableOpacity>
         </View>

@@ -14,6 +14,9 @@ import { GoogleSignin} from '@react-native-google-signin/google-signin';
 import SignUpModal from "./pages/Auth/AuthComponents/LoginModal/LoginModal";
 import Login from "./pages/Auth/Login&Register/Login";
 import Register from "./pages/Auth/Login&Register/Register";
+import Order from "./pages/OrdersPages/Order";
+import Favorites from "./pages/OrdersPages/Favorites";
+import Perfil from "./pages/ProfilePages/Profile";
 
 const Stack = createNativeStackNavigator();
 
@@ -81,6 +84,24 @@ export default function AppNavigation() {
                                 headerMode="none"
                                 name="Register"
                                 component={Register}
+                            />
+                            <Stack.Screen
+                                options={{ headerShown: false }}
+                                headerMode="none"
+                                name="Order"
+                                component={Order}
+                            />
+                            <Stack.Screen
+                                options={{ headerShown: false }}
+                                headerMode="none"
+                                name="Favoritos"
+                                component={Favorites}
+                            />
+                            <Stack.Screen
+                                options={{ headerShown: false }}
+                                headerMode="none"
+                                name="Perfil"
+                                component={Perfil}
                             />
                         </>
                     ) : (
