@@ -5,21 +5,46 @@ import LinearGradient from 'react-native-linear-gradient';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {COLORS, SIZES} from '../../../assets/constants/index';
 import WelcomePage from '../HomePages/Welcome';
-import Carousel from '../HomePages/Carousel';
 import Headings from '../HomePages/Headings';
 import ProductRow from '../ProductPages/ProductRow';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from 'react';
 
 
 const Feed = () => {
+  const [userData, setUserData] = useState(null);
+  const [userLogin, setUserLogin] = useState(null);
 
   const navigation = useNavigation();
+
+  useEffect(()=>{
+    checkExistingUser();
+  },[]);
+
+  const checkExistingUser = async ()=>{
+      
+    const userId = `users${JSON.parse(id)}`;
+
+      try {
+        const currentUser = await AsyncStorage.getItem(userId);
+
+        if (currentUser !== null) {
+          const parsedData = JSON.parse(currentUser)
+          setUserData(parsedData)
+          setUserLogin(true)
+        }
+      } catch (error) {
+        console.log("Error retrieving the data:", error)
+      }
+
+  }
 
   return (
   <SafeAreaView>
       <View style={styles.appBarWrapper}>
         <View style={styles.appBar}>
           <Ionicons name='location-outline' size={24} color={COLORS.black}/>
-          <Text style={styles.location}>Santa Catarina Brasil</Text>
+          <Text style={styles.location}>{userData?userData.location: "Sua localização"}</Text>
           <View style={{alignItems: 'flex-end'}}>
 
               <View style={styles.cartCount}>
@@ -38,10 +63,10 @@ const Feed = () => {
         <ScrollView>
           <View style={{marginHorizontal: 22,}}>
             <WelcomePage/>
-            <Carousel/>
             <Headings/>
             
           </View>
+          <View style={{marginHorizontal: 4}}><ProductRow/></View>
           <View style={{marginHorizontal: 4}}><ProductRow/></View>
         </ScrollView>
       </View>

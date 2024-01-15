@@ -4,7 +4,7 @@ import { TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 // Componente de botão personalizado para continuar com a Apple
 const AppleSignInButton = ({ onPress }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity style={styles.button} onPress={()=> onPress}>
       <Image
         source={require('../../../../../assets/images/apple-icon.png')} // Substitua pelo caminho correto do ícone
         style={styles.buttonIcon}

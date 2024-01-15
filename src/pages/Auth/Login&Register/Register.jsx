@@ -22,10 +22,24 @@ import Apple from '../../../../assets/images/misc/apple.svg';
 import CustomButton from './Components/CustomButton';
 import Feather from 'react-native-vector-icons/Feather';
 
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+
+
+const RegisterSchema = Yup.object().shape({
+  nomeCompleto: Yup.string().required('Nome completo obrigatório'),
+  email: Yup.string().email('Email inválido').required('Email obrigatório'),
+  senha: Yup.string().required('Senha obrigatória').min(8, 'A senha precisa conter pelo menos 8 caracteres'),
+  confirmarSenha: Yup.string().oneOf([Yup.ref('senha'), null], 'As senhas devem corresponder'),
+  localizacao: Yup.string().required('Localização obrigatória'),
+});
+
 const Register = ({navigation}) => {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [dobLabel, setDobLabel] = useState('Selecione a Data de Nascimento');
+  const [loader, setLoader] = useState(false)
 
   const formatDate = (date) => {
     const day = date.getDate().toString().padStart(2, '0');
@@ -35,9 +49,14 @@ const Register = ({navigation}) => {
     return `${day}/${month}/${year}`;
   };
 
- 
+  const handleSubmit = (values) => {
+    console.log(values);
+    // Lógica de envio dos dados
+  };
 
   return (
+
+    
 
     <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
       <ScrollView
@@ -106,97 +125,59 @@ const Register = ({navigation}) => {
           Ou, registrar com email ...
         </Text>
 
-        <InputField
-          label={'Nome completo'}
-          icon={
-            <Ionicons
-              name="person-outline"
-              size={20}
-              color="#666"
-              style={{marginRight: 5}}
-            />
-          }
-        />
+        <Formik
+          initialValues={{ nomeCompleto: '', email: '', senha: '', confirmarSenha: '', localizacao: '' }}
+          validationSchema={RegisterSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+           <>
+           <InputField label="Nome completo"
+                       icon={<Ionicons name="person-outline" size={20} color="#666" style={{ marginRight: 5 }} />}
+                       onChangeText={handleChange('nomeCompleto')}
+                       onBlur={handleBlur('nomeCompleto')}
+                       value={values.nomeCompleto}
+                       errorMessage={touched.nomeCompleto && errors.nomeCompleto} />
 
-        <InputField
-          label={'Seu email'}
-          icon={
-            <MaterialIcons
-              name="alternate-email"
-              size={20}
-              color="#666"
-              style={{marginRight: 5}}
-            />
-          }
-          keyboardType="email-address"
-        />
+           <InputField label="Seu email"
+                       icon={<MaterialIcons name="alternate-email" size={20} color="#666" style={{ marginRight: 5 }} />}
+                       keyboardType="email-address"
+                       onChangeText={handleChange('email')}
+                       onBlur={handleBlur('email')}
+                       value={values.email}
+                       errorMessage={touched.email && errors.email} />
 
-        <InputField
-          label={'Sua senha'}
-          icon={
-            <Feather
-              name="lock"
-              size={20}
-              color="#666"
-              style={{marginRight: 5}}
-            />
-          }
-          inputType="password"
-        />
+           <InputField label="Sua senha"
+                       icon={<Feather name="lock" size={20} color="#666" style={{ marginRight: 5 }} />}
+                       inputType="password"
+                       onChangeText={handleChange('senha')}
+                       onBlur={handleBlur('senha')}
+                       value={values.senha}
+                       errorMessage={touched.senha && errors.senha} />
 
-        <InputField
-          label={'Confirme a senha'}
-          icon={
-            <Feather
-              name="lock"
-              size={20}
-              color="#666"
-              style={{marginRight: 5}}
-            />
-          }
-          inputType="password"
-        />
+           <InputField label="Confirme a senha"
+                       icon={<Feather name="lock" size={20} color="#666" style={{ marginRight: 5 }} />}
+                       inputType="password"
+                       onChangeText={handleChange('confirmarSenha')}
+                       onBlur={handleBlur('confirmarSenha')}
+                       value={values.confirmarSenha}
+                       errorMessage={touched.confirmarSenha && errors.confirmarSenha} />
 
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomColor: '#ccc',
-            borderBottomWidth: 1,
-            paddingBottom: 8,
-            marginBottom: 30,
-          }}>
-          <Ionicons
-            name="calendar-outline"
-            size={20}
-            color="#666"
-            style={{marginRight: 5}}
-          />
-          <TouchableOpacity onPress={() => setOpen(true)}>
-            <Text style={{color: '#666', marginLeft: 5, marginTop: 5}}>
-              {dobLabel}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        <DatePicker
-          modal
-          open={open}
-          date={date}
-          mode={'date'}
-          maximumDate={new Date('2007-01-01')}
-          minimumDate={new Date('1980-01-01')}
-          onConfirm={date => {
-            setOpen(false);
-            setDate(date);
-            setDobLabel(formatDate(date)); 
-          }}
-          onCancel={() => {
-            setOpen(false);
-          }}
-        />
+           <InputField
+                      label="Localização"
+                      icon={<Ionicons name="location-outline" size={20} color="#666" style={{ marginRight: 5 }} />}
+                      onChangeText={handleChange('localizacao')}
+                      onBlur={handleBlur('localizacao')}
+                      value={values.localizacao}
+                      errorMessage={touched.localizacao && errors.localizacao} />
 
 
-        <CustomButton label={'Registrar'} onPress={() => {handleSubmit}} loader/>
+           <CustomButton label="Registrar" onPress={handleSubmit} />
+         </>
+          )}
+        </Formik>
+
+
 
         <View
           style={{
