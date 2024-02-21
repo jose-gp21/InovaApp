@@ -51,12 +51,11 @@ const Register = ({navigation}) => {
 
   const handleSubmit = (values) => {
     console.log(values);
-    // Lógica de envio dos dados
+
+          console.log(newUser)
   };
 
   return (
-
-    
 
     <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
       <ScrollView

@@ -1,5 +1,9 @@
-import { StyleSheet } from "react-native";
+import { useState, useEffect } from "react";
+import { StyleSheet, ScrollView, StatusBar, TouchableOpacity, Text, View, Image, SafeAreaView } from "react-native";
 import { COLORS, SHADOWS, SIZES } from "../../../assets/constants";
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SignUpModal from "../Auth/AuthComponents/LoginModal/LoginModal";
 
 const Perfil = ({ navigation }) => {
   const [userData, setUserData] = useState(null);
@@ -7,7 +11,6 @@ const Perfil = ({ navigation }) => {
   const [isSignUpModalVisible, setSignUpModalVisible] = useState(false);
   const openSignUpModal = () => setSignUpModalVisible(true);
   const closeSignUpModal = () => setSignUpModalVisible(false);
-
 
   useEffect(() => {
     checkExistingUser();
@@ -109,7 +112,7 @@ const Perfil = ({ navigation }) => {
             {userLogin ? userData?.name : "Faça Login por favor"}
           </Text>
           {!userLogin ? (
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <TouchableOpacity onPress={() => navigation.navigate('LoginModal')}>
               <View style={styles.loginBtn}>
                 <Text style={styles.menuText}>LOGIN</Text>
               </View>
@@ -169,8 +172,6 @@ const Perfil = ({ navigation }) => {
           ) : null}
         </View>
   
-        {/* O modal SignUpModal está aqui caso você queira usá-lo em algum momento */}
-        {/* Certifique-se de que a lógica para abrir e fechar o modal esteja implementada corretamente */}
         <SignUpModal
           isVisible={isSignUpModalVisible}
           onClose={closeSignUpModal}
